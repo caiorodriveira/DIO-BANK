@@ -10,10 +10,6 @@ public class Conta {
     private double saldo;
     private Pessoa titular;
 
-    protected void exibirSaldo() {
-        System.out.printf("Saldo atual: R$%.2f\n", this.saldo);
-    }
-
     protected boolean depositar(double deposito) {
         boolean depositoRealizado;
         if (deposito > 0) {
@@ -28,11 +24,15 @@ public class Conta {
 
     protected boolean sacar(double saque) {
         boolean saqueRealizado;
+        double saqueLimite = 5000f;
         if (saque > this.saldo) {
             System.out.println("Saldo insuficiente");
             saqueRealizado = false;
         } else if (saque <= 0) {
             System.out.println("Não é possivel realizar saques menores ou iguais a 0!");
+            saqueRealizado = false;
+        } else if (saque > saqueLimite){
+            System.out.println("Limite de saque excedido\nSaque máximo: R$5.000,00");
             saqueRealizado = false;
         } else {
             this.saldo -= saque;

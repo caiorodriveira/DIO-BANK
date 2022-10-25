@@ -9,12 +9,15 @@ public class Main {
         int idade, op = 1;
         Long cpf = 0L;
 
-        System.out.println("Bem vindo ao banco digital DIO-BANK ");
-        System.out.print("\nDigite seu nome: ");
+
+        System.out.println("\n-----Bem vindo ao banco digital DIO-BANK----- ");
+        System.out.print("Digite seu nome para iniciarmos: ");
         nome = in.nextLine();
+
 
         while (op != 0) {
             cpf = 0L;
+
             System.out.println("\n+----------------+");
             System.out.println("| 1. Criar conta |");
             System.out.println("| 2. Creditos    |");
@@ -42,7 +45,7 @@ public class Main {
                         Conta minhaConta = new Conta();
                         minhaConta.setTitular(new Pessoa(nome, idade, cpf));
                         minhaConta.setSaldo(0);
-                        System.out.println("Conta criada com sucesso");
+                        System.out.println("\nConta criada com sucesso");
 
                         realizarOperacoes(minhaConta);
                         break;
@@ -58,6 +61,7 @@ public class Main {
                     break;
             }
         }
+
     }
 
 
@@ -66,7 +70,7 @@ public class Main {
         int op = -1;
 
         while (op != 9) {
-            System.out.println("\n+----------------------------+");
+            System.out.println("+----------------------------+");
             System.out.println("| 1. Mostrar Saldo           |");
             System.out.println("| 2. Depositar               |");
             System.out.println("| 3. Sacar                   |");
@@ -75,22 +79,22 @@ public class Main {
             System.out.println("+----------------------------+");
             System.out.print("Escolha uma opção: ");
             op = in.nextInt();
-
+            System.out.println();
             switch (op) {
                 case 1:
-                    conta.exibirSaldo();
+                    exibirSaldo(conta);
                     break;
                 case 2:
                     System.out.print("Digite o valor do deposito: ");
                     boolean depositoRealizado = conta.depositar(in.nextDouble());
                     System.out.println(depositoRealizado ? "Deposito realizado com sucesso" : "Falha ao depositar");
-                    conta.exibirSaldo();
+                    exibirSaldo(conta);
                     break;
                 case 3:
                     System.out.print("Digite o valor do saque: ");
                     boolean saqueRealizado = conta.sacar(in.nextDouble());
                     System.out.println(saqueRealizado ? "Saque realizado com sucesso" : "Falha ao sacar");
-                    conta.exibirSaldo();
+                    exibirSaldo(conta);
                     break;
                 case 4:
                     System.out.println("Dados do usuário: ");
@@ -125,6 +129,10 @@ public class Main {
             cont++;
         }
         return cont;
+    }
+
+    private static void exibirSaldo(Conta conta) {
+        System.out.printf("Saldo atual: R$%.2f\n", conta.getSaldo());
     }
 
 }
